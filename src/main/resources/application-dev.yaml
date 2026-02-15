@@ -1,0 +1,24 @@
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: demo
+      log-requests: true
+      log-responses: true
+logging:
+  level:
+    dev:
+      langchain4j: DEBUG
+      ai4j: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/platzi_db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
