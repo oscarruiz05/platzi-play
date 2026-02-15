@@ -1,5 +1,8 @@
 package com.example.platzi_play.web.controller;
 
+import com.example.platzi_play.domain.dto.MovieDto;
+import com.example.platzi_play.domain.repository.MovieRepository;
+import com.example.platzi_play.domain.service.MovieService;
 import com.example.platzi_play.persistence.crud.CrudMovieEntity;
 import com.example.platzi_play.persistence.entity.MovieEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +15,16 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private final CrudMovieEntity crudMovieEntity;
+    private final MovieService movieService;
 
-    public MovieController(CrudMovieEntity crudMovieEntity) {
-        this.crudMovieEntity = crudMovieEntity;
+    public MovieController(
+            MovieService movieService
+    ) {
+        this.movieService = movieService;
     }
 
     @GetMapping
-    public List<MovieEntity> findAll()
-    {
-        return this.crudMovieEntity.findAll();
+    public List<MovieDto> findAll() {
+        return this.movieService.findAll();
     }
 }
