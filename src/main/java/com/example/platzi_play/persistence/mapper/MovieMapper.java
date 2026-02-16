@@ -7,13 +7,13 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {GenreMapper.class})
 public interface MovieMapper {
     @Mapping(source = "id",  target = "movieId")
     @Mapping(source = "title",  target = "movieTitle")
     @Mapping(source = "description",  target = "movieDescription")
     @Mapping(source = "duration",  target = "duration")
-    @Mapping(source = "genre",  target = "genre")
+    @Mapping(source = "genre",  target = "genre", qualifiedByName = "stringToGenre")
     @Mapping(source = "releaseDate",  target = "releaseDate")
     @Mapping(source = "rating",  target = "rating")
     MovieDto toDto(MovieEntity movieEntity);
