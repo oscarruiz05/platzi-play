@@ -1,11 +1,10 @@
 package com.example.platzi_play.web.controller;
 
 import com.example.platzi_play.domain.dto.MovieDto;
+import com.example.platzi_play.domain.dto.RecomendationRequestDto;
 import com.example.platzi_play.domain.dto.UpdateMovieDto;
-import com.example.platzi_play.domain.repository.MovieRepository;
 import com.example.platzi_play.domain.service.MovieService;
-import com.example.platzi_play.persistence.crud.CrudMovieEntity;
-import com.example.platzi_play.persistence.entity.MovieEntity;
+import com.example.platzi_play.domain.service.PlatziPlayAiService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +15,14 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final PlatziPlayAiService platziPlayAiService;
 
     public MovieController(
-            MovieService movieService
+            MovieService movieService,
+            PlatziPlayAiService platziPlayAiService
     ) {
         this.movieService = movieService;
+        this.platziPlayAiService = platziPlayAiService;
     }
 
     @GetMapping
@@ -39,6 +41,11 @@ public class MovieController {
     public ResponseEntity<MovieDto> save(@RequestBody MovieDto movieDto) {
         MovieDto savedMovie = this.movieService.save(movieDto);
         return ResponseEntity.ok(savedMovie);
+    }
+
+    @PostMapping("/recommendation")
+    public ResponseEntity<String> generateMovieRecommendation(@RequestBody RecomendationRequestDto recomendationRequestDto) {
+        return ResponseEntity.ok(this.platziPlayAiService.generateMovieRecommendation(recomendationRequestDto.userPreference()));
     }
 
     @PutMapping("/{id}")
