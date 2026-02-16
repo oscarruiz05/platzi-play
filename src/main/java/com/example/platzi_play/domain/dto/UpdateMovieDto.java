@@ -2,12 +2,9 @@ package com.example.platzi_play.domain.dto;
 
 import com.example.platzi_play.domain.Genre;
 
-public record MovieDto(
-        Long movieId,
+public record UpdateMovieDto(
         String movieTitle,
         String movieDescription,
-        Integer duration,
-        Genre genre,
         String releaseDate,
         Double rating
 ) {

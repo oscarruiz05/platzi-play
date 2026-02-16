@@ -1,6 +1,7 @@
 package com.example.platzi_play.domain.service;
 
 import com.example.platzi_play.domain.dto.MovieDto;
+import com.example.platzi_play.domain.dto.UpdateMovieDto;
 import com.example.platzi_play.domain.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,13 @@ public class MovieService {
 
     public MovieDto findById(Long id) {
         return this.movieRepository.findById(id);
+    }
+
+    public  MovieDto save(MovieDto movieDto) {
+        return this.movieRepository.save(movieDto);
+    }
+
+    public  MovieDto update(Long id, UpdateMovieDto updateMovieDto) {
+        return this.movieRepository.update(id, updateMovieDto);
     }
 }
