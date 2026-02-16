@@ -5,6 +5,7 @@ import com.example.platzi_play.domain.repository.MovieRepository;
 import com.example.platzi_play.domain.service.MovieService;
 import com.example.platzi_play.persistence.crud.CrudMovieEntity;
 import com.example.platzi_play.persistence.entity.MovieEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,14 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<MovieDto> findAll() {
-        return this.movieService.findAll();
+    public ResponseEntity<List<MovieDto>> findAll() {
+        List<MovieDto> movieDto = this.movieService.findAll();
+        return ResponseEntity.ok(movieDto);
     }
 
     @GetMapping("/{id}")
-    public MovieDto findById(@PathVariable Long id) {
-        return this.movieService.findById(id);
+    public ResponseEntity<MovieDto> findById(@PathVariable Long id) {
+        MovieDto movieDto = this.movieService.findById(id);
+        return ResponseEntity.ok(movieDto);
     }
 }
