@@ -6,6 +6,7 @@ import com.example.platzi_play.domain.service.MovieService;
 import com.example.platzi_play.persistence.crud.CrudMovieEntity;
 import com.example.platzi_play.persistence.entity.MovieEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,10 @@ public class MovieController {
     @GetMapping
     public List<MovieDto> findAll() {
         return this.movieService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public MovieDto findById(@PathVariable Long id) {
+        return this.movieService.findById(id);
     }
 }
